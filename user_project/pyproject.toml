@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "user-project"
+version = "0.0.1"
+description = "Test project using the test pypi server"
+authors = ["Rowan"]
+
+[[tool.poetry.source]]
+name = "test-pypi-server"
+url = "http://localhost:8080/simple"
+
+[tool.poetry.dependencies]
+test_package = { version = "==0.1", source = "test-pypi-server" }
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

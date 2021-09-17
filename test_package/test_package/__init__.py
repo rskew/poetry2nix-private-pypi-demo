@@ -1,0 +1,2 @@
+def hihi():
+    print("HI")
