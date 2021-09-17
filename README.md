@@ -1,7 +1,7 @@
 To start and test the pypi server:
 ```sh
 nix-shell
-pypi-server -P passwordfile -a update,download,list -p 8080 --hash-algo sha256 ./packages &
+pypi-server -P passwordfile -a update,download,list -p 8080 --hash-algo sha256 ./simple &
 curl localhost:8080/simple/test-package/ -u hello:HIHI
 ```
 
@@ -16,4 +16,10 @@ The test package is built and released via:
 ```sh
 cd test_package; python setup.py sdist
 mv dist/test_package-0.1.tar.gz ../simple/test_package/
+```
+
+passwordfile created via
+```sh
+htpasswd -c passwordfile hello
+New password: HIHI
 ```
