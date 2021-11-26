@@ -8,8 +8,17 @@ curl localhost:8080/simple/test-package/ -u hello:HIHI
 To test installing package via poetry2nix (demonstrating the new feature to download packages from private pypi repos):
 ```sh
 cd user_project
-nix-shell
+# Move .netrc to /etc/nix because of permission errors trying to put . in extra-sandbox-paths
+sudo mv .netrc /etc/nix/.netrc
+sudo chmod 600 /etc/nix/.netrc
+# Change permissions on .netrc to the nix builder
+sudo chown 30001:30000 /etc/nix/.netrc
+nix-shell -I NETRC=/etc/nix/.netrc --option extra-sandbox-paths /etc/nix
 python -c "from test_package import hihi; hihi()"
+```
+To force re-download of the package after a successful build, run:
+```sh
+nix-store --delete /nix/store/*-test_package-0.1* /nix/store/*-test_package-0.1*
 ```
 
 The test package is built and released via:

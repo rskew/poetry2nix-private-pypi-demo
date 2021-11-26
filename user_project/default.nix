@@ -7,7 +7,6 @@ let
     projectDir = ./.;
     pyproject = ./pyproject.toml;
     poetrylock = ./poetry.lock;
-    repositoryCredentialsFile = ./repository-credentials.json;
   };
 in
 pkgs.stdenv.mkDerivation {
